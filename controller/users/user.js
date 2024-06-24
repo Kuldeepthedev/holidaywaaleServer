@@ -15,7 +15,10 @@ exports.sendOtp = async (req, resp) => {
     let user = await User.findOne({ where: { email: email } });
 
     if (user) {
-      return resp.status(409).json("User Already Exists");
+      return resp.status(409).json({
+        success:false,
+        message : "User Already Exists"
+      });
     } else {
       const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -66,7 +69,10 @@ exports.sendOtp = async (req, resp) => {
         },
       });
 
-      resp.status(200).json(user.email);
+      resp.status(200).json({
+        success:true,
+        data:user.email
+      });
     }
   } catch (error) {
     console.error(error);
@@ -80,7 +86,10 @@ exports.resendOtp = async (req, resp) => {
     let user = await User.findOne({ where: { email: email } });
 
     if (!user) {
-      return resp.status(404).json("User not found");
+      return resp.status(404).json({
+        success:false,
+        message:"User not found"
+      });
     }
 
     const _otp = generateOTP();
@@ -133,7 +142,10 @@ exports.userRegistration = async (req, resp) => {
     let user = await User.findOne({ where: { email: email } });
 
     if (!user) {
-      return resp.status(404).json("User not found");
+      return resp.status(404).json({
+        success:false,
+        message:"User not found"
+      });
     }
 
     if (user.OTP !== otp) {
