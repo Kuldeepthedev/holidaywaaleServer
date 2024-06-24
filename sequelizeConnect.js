@@ -18,4 +18,5 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.package = require('./models/admin/package')(Sequelize,sequelize)
 db.user = require('./models/user/user')(Sequelize,sequelize)
+db.query = require('./models/user/query')(Sequelize,sequelize)
 module.exports = db;

@@ -1,19 +1,24 @@
-const { executeQuery } = require("../../../database");
+const db = require("../../../sequelizeConnect");
+
+const Query = db.query
 
 exports.defaultMessage = async(data)=>{
    const userDetails = {
       email:data[0].data,
       phoneNumber:data[1].data
    }
-   console.log(data, userDetails)
-   const insertData = 'INSERT INTO inquiry_table (email, phoneNumber) VALUES (?, ?)'
-   const params = [userDetails.email, userDetails.phoneNumber];
-   await executeQuery(insertData, params, (err, result) => {
-    if (err) {
-      console.error('Error executing query:', err);
-
-    }
-  });
+   Query.create(userDetails)
+   .then((createdPackage) => {
+     if (createdPackage) {
+      console.log('success')
+     } else {
+       console.log("error")
+     }
+   })
+   .catch((err) => {
+     console.log(err)
+   });
+  
   return {
 
     message: 'Thank you for taking out time to chat with me. One of our Team contact you soon'
