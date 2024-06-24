@@ -1,17 +1,21 @@
 const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
-const sequelize = new Sequelize('Hodidaywaale', 'root', null , {
-  host: '127.0.0.1',
-  dialect: "mysql"
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'mysql',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 });
 
-const db = {}
-
+const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
 db.package = require('./models/admin/package')(Sequelize,sequelize)
 db.user = require('./models/user/user')(Sequelize,sequelize)
-
-module.exports = {db}
+module.exports = db;

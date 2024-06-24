@@ -1,4 +1,4 @@
-const { db } = require("../../sequelizeConnect");
+const  db  = require("../../sequelizeConnect");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");

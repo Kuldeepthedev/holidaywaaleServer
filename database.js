@@ -1,34 +1,23 @@
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
+const dotenv = require('dotenv');
 
+// Load environment variables from .env file
+dotenv.config();
 
-const pool = mysql.createPool({
-  host: 'sql12.freesqldatabase.com',
-  user: 'sql12714354',
-  password: 'Yqs677fsnL',
-  database: 'sql12714354'
-});
+async function testConnection() {
+    try {
+        const connection = await mysql.createConnection({
+            host: process.env.DATABASE_HOST,
+            user: process.env.USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DATABASE
+        });
 
-// Function to execute SQL queries
-function executeQuery(sql, params, callback) {
-  pool.getConnection((err, connection) => {
-    if (err) {
-      callback(err, null);
-      return;
+        console.log('MySQL connection successful!');
+        await connection.end();
+    } catch (error) {
+        console.error('Error connecting to MySQL:', error.message);
     }
-
-    // Execute query
-    connection.query(sql, params, (queryError, result) => {
-      connection.release(); // Release connection
-
-      if (queryError) {
-        callback(queryError, null);
-      } else {
-        callback(null, result);
-      }
-    });
-  });
 }
 
-module.exports = {
-  executeQuery // Export the function for external use
-};
+testConnection();

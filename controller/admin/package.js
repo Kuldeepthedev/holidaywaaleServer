@@ -1,7 +1,7 @@
 const { packageMessage } = require("../../helpers/package");
-const { db } = require("../../sequelizeConnect");
+const  db  = require("../../sequelizeConnect");
 const { jsonResponse } = require("../../utils/response");
-const Package = db.package;
+const Package = db.package
 
 const Addpackage = (req, res) => {
   const {

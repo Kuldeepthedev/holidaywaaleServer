@@ -4,8 +4,8 @@ const socketHandler = require('./scoketApi/socketHandle');
 const bodyParser = require('body-parser');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const dotenv = require('dotenv').config()
-const {db} = require('./sequelizeConnect')
-db.sequelize.sync();
+const db = require("./sequelizeConnect");
+db.sequelize.sync(); 
 const adminPackage = require('./routes/admin/package')
 const user = require('./routes/user/user')
 const app = express();
@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 
 const cors = require('cors');
+
 
 
 
