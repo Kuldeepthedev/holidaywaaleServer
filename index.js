@@ -9,15 +9,14 @@ db.sequelize.sync();
 const adminPackage = require('./routes/admin/package')
 const user = require('./routes/user/user')
 const app = express();
-<<<<<<< HEAD
 app.use(bodyParser.json());
 
-const httpServer = require("http").createServer(app);
+
 const cors = require('cors');
 
-=======
-const cors = require('cors')
->>>>>>> a8f3045e4219f6314a3a7935af8e41ae219c2290
+
+
+
 app.use(cors({
   origin: '*'
 }));
