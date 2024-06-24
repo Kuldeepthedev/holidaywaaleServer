@@ -4,7 +4,7 @@ const Query = db.query
 
 exports.defaultMessage = async(data)=>{
    const userDetails = {
-      email:data[0].data,
+      Email:data[0].data,
       phoneNumber:data[1].data
    }
    Query.create(userDetails)
