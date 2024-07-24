@@ -19,7 +19,7 @@ const cors = require('cors');
 
 
 app.use(cors({
-  origin: '*'
+  origin: ['https:www.//holidaywaale.in', 'https://holidaywaale.in']
 }));
 
 app.use(function(req, res, next) {
